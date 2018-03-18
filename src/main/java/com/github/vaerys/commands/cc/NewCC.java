@@ -27,7 +27,7 @@ public class NewCC extends Command {
     public String execute(String args, CommandObject command) {
         ProfileObject object = command.guild.users.getUserByID(command.user.longID);
         if (object != null && object.getSettings().contains(UserSetting.DENY_MAKE_CC)) {
-            return "> You have been denied the creation of custom commands.";
+            return "> " + command.user.mention() + ", You have been denied the creation of custom commands.";
         }
         if (command.guild.getChannelsByType(ChannelSetting.CC_DENIED).contains(command.channel.get()))
             return "> This Channel has CCs Denied, You cannot create ccs here.";
@@ -45,6 +45,7 @@ public class NewCC extends Command {
         if (object.getSettings().contains(UserSetting.AUTO_SHITPOST)) {
             isShitpost = true;
         }
+
         String nameCC = splitFirst.getFirstWord();
         String argsCC = splitFirst.getRest();
 
